@@ -1,0 +1,65 @@
+<layout name="base"/>
+<div class="tpl-content-wrapper">
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title  am-cf">
+                            <ol class="am-breadcrumb am-breadcrumb-slash">
+                                <li><a href="{:U('Admin/Index/index')}" class="am-icon-home">首页</a></li>
+                                <li><a href="{:U('Admin/Category/index')}">分类管理</a></li>
+                                <li class="am-active">编辑分类</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="widget-body am-fr">
+
+                        <form class="am-form tpl-form-border-form tpl-form-border-br" method="post"
+                              action="{:U('Admin/Category/edit')}/id/{$category.id}">
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">分类名称:</label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" name="category_name"
+                                           placeholder="请输入分类名称" value="{$category.category_name}">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">显示状态:</label>
+                                <div class="am-u-sm-9">
+                                    <div class="tpl-switch">
+                                        <if condition="($category.display_status eq 1)">
+                                            <input type="checkbox" class="ios-switch bigswitch tpl-switch-btn" checked="" name="display_status">
+                                            <else/>
+                                            <input type="checkbox" class="ios-switch bigswitch tpl-switch-btn"  name="display_status">
+                                        </if>
+                                        <div class="tpl-switch-btn-view">
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">分类描述:</label>
+                                <div class="am-u-sm-9">
+                                    <textarea class="" rows="5"
+                                              placeholder="请输入文章内容" name="category_description">{$category.category_description}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <div class="am-u-sm-9 am-u-sm-push-3">
+                                    <button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

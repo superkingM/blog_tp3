@@ -12,5 +12,6 @@ return [
     'DB_CHARSET' => 'utf8', // 字符集
     'DB_DEBUG' => TRUE, // 数据库调试模式 开启后可以记录SQL日志
 
-    'URL_HTML_SUFFIX'=>''//伪静态
+    'URL_HTML_SUFFIX' => '',//伪静态
+    'URL_CASE_INSENSITIVE' => true//不区分大小写true
 ];

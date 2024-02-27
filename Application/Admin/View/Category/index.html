@@ -1,4 +1,4 @@
-<layout name="base" />
+<layout name="base"/>
 <div class="tpl-content-wrapper">
     <div class="row-content am-cf">
         <div class="row">
@@ -7,12 +7,11 @@
                     <div class="widget-head am-cf">
                         <div class="widget-title  am-cf">
                             <ol class="am-breadcrumb am-breadcrumb-slash">
-                            <li><a href="{:U('Admin/Index/index')}" class="am-icon-home">首页</a></li>
-                            <li><a href="{:U('Admin/Category/index')}">分类管理</a></li>
-                            <li class="am-active">分类列表</li>
-                        </ol></div>
-
-
+                                <li><a href="{:U('Admin/Index/index')}" class="am-icon-home">首页</a></li>
+                                <li><a href="{:U('Admin/Category/index')}">分类管理</a></li>
+                                <li class="am-active">分类列表</li>
+                            </ol>
+                        </div>
                     </div>
                     <div class="widget-body  am-fr">
 
@@ -20,14 +19,17 @@
                             <div class="am-form-group">
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
-                                        <button type="button" class="am-btn am-btn-default am-btn-success"><span class="am-icon-plus"></span> 新增</button>
+                                        <a type="button" href="{:U('Admin/Category/add')}"
+                                           class="am-btn am-btn-default am-btn-success"><span
+                                                class="am-icon-plus"></span> 新增</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="am-u-sm-12">
-                            <table width="100%" class="am-table am-table-striped am-table-compact am-table-bordered am-table-radius tpl-table-black">
+                            <table width="100%"
+                                   class="am-table am-table-striped am-table-compact am-table-bordered am-table-radius tpl-table-black">
                                 <thead>
                                 <tr>
                                     <th>分类名称</th>
@@ -51,7 +53,7 @@
                                         </td>
                                         <td>
                                             <div class="tpl-table-black-operation">
-                                                <a href="javascript:;">
+                                                <a href="{:U('Admin/Category/edit')}/id/{$item.id}">
                                                     <i class="am-icon-pencil"></i> 编辑
                                                 </a>
                                                 <a href="javascript:;" class="tpl-table-black-operation-del">

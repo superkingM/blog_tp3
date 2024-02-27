@@ -101,61 +101,51 @@
                             <ol class="am-breadcrumb am-breadcrumb-slash">
                                 <li><a href="<?php echo U('Admin/Index/index');?>" class="am-icon-home">首页</a></li>
                                 <li><a href="<?php echo U('Admin/Category/index');?>">分类管理</a></li>
-                                <li class="am-active">分类列表</li>
+                                <li class="am-active">新增分类</li>
                             </ol>
                         </div>
                     </div>
-                    <div class="widget-body  am-fr">
+                    <div class="widget-body am-fr">
 
-                        <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
+                        <form class="am-form tpl-form-border-form tpl-form-border-br" method="post"
+                              action="<?php echo U('Admin/Category/add');?>">
                             <div class="am-form-group">
-                                <div class="am-btn-toolbar">
-                                    <div class="am-btn-group am-btn-group-xs">
-                                        <a type="button" href="<?php echo U('Admin/Category/add');?>"
-                                           class="am-btn am-btn-default am-btn-success"><span
-                                                class="am-icon-plus"></span> 新增</a>
-                                    </div>
+                                <label class="am-u-sm-3 am-form-label">分类名称:</label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" name="category_name"
+                                           placeholder="请输入分类名称">
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="am-u-sm-12">
-                            <table width="100%"
-                                   class="am-table am-table-striped am-table-compact am-table-bordered am-table-radius tpl-table-black">
-                                <thead>
-                                <tr>
-                                    <th>分类名称</th>
-                                    <th>分类描述</th>
-                                    <th>分类状态</th>
-                                    <th>操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php if(is_array($list)): foreach($list as $key=>$item): ?><tr>
-                                        <td><?php echo ($item["category_name"]); ?></td>
-                                        <td><?php echo ($item["category_description"]); ?></td>
-                                        <td>
-                                            <?php if(($item["display_status"] == 1)): ?><span class="am-badge am-badge-primary">显示</span>
-                                                <?php else: ?>
-                                                <span class="am-badge am-badge-danger">隐藏</span><?php endif; ?>
-
-                                        </td>
-                                        <td>
-                                            <div class="tpl-table-black-operation">
-                                                <a href="<?php echo U('Admin/Category/edit');?>/id/<?php echo ($item["id"]); ?>">
-                                                    <i class="am-icon-pencil"></i> 编辑
-                                                </a>
-                                                <a href="javascript:;" class="tpl-table-black-operation-del">
-                                                    <i class="am-icon-trash"></i> 删除
-                                                </a>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">显示状态:</label>
+                                <div class="am-u-sm-9">
+                                    <div class="tpl-switch">
+                                        <input type="checkbox" class="ios-switch bigswitch tpl-switch-btn" checked=""
+                                               name="display_status">
+                                        <div class="tpl-switch-btn-view">
+                                            <div>
                                             </div>
-                                        </td>
-                                    </tr><?php endforeach; endif; ?>
+                                        </div>
+                                    </div>
 
-                                <!-- more data -->
-                                </tbody>
-                            </table>
-                        </div>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">分类描述:</label>
+                                <div class="am-u-sm-9">
+                                    <textarea class="" rows="3"
+                                              placeholder="请输入文章内容" name="category_description"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <div class="am-u-sm-9 am-u-sm-push-3">
+                                    <button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
