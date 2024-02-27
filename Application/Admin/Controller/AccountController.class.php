@@ -10,16 +10,16 @@ use Think\Controller;
 
 class AccountController extends Controller
 {
-    public function _initialize()
+    /**
+     * 登录
+     * @return void
+     */
+    public function login()
     {
         $admin = session('admin');
         if ($admin) {
             $this->redirect('Admin/Index/index');
         }
-    }
-
-    public function login()
-    {
         if (IS_POST) {
             $account = I('post.account');
             $password = I('post.password');
@@ -46,5 +46,19 @@ class AccountController extends Controller
         } else {
             $this->display();
         }
+    }
+
+    /**
+     * 退出
+     * @return void
+     */
+    public function logout()
+    {
+        $admin = session('admin');
+        if (!$admin) {
+            $this->redirect('Admin/Account/login');
+        }
+        session('admin', null);
+        $this->ajaxReturn(['code' => 200, 'msg' => 'ok', 'data' => []]);
     }
 }

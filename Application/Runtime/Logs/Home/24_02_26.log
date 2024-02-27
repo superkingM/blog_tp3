@@ -176,3 +176,13 @@ INFO: [ app_begin ] --END-- [ RunTime:0.000493s ]
 SQL: SHOW COLUMNS FROM `category` [ RunTime:0.0036s ]
 SQL: SELECT * FROM `category`  [ RunTime:0.0002s ]
 
+[ 2024-02-26T17:37:18+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000031s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001834s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002137s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002265s ]
+SQL: SHOW COLUMNS FROM `category` [ RunTime:0.0131s ]
+SQL: SELECT * FROM `category`  [ RunTime:0.0009s ]
+

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -37,8 +37,8 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="{:U('Admin/Index')}">首页</a></li>
-                <li><a href="{:U('Admin/Category/index')}">分类管理</a></li>
+                <li><a href="<?php echo U('Admin/Index');?>">首页</a></li>
+                <li class="active"><a href="<?php echo U('Admin/Category/index');?>">分类管理</a></li>
                 <li><a href="#">标签管理</a></li>
                 <li><a href="#">文章管理</a></li>
                 <li><a href="#">评论管理</a></li>
@@ -49,39 +49,30 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <ol class="breadcrumb">
                 <li><a href="#">首页</a></li>
+                <li><a href="#">分类管理</a></li>
+                <li class="active">分类列表</li>
             </ol>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>xxxx</th>
-                        <th>xxxx</th>
-                        <th>xxxx</th>
+                        <th>分类名称</th>
+                        <th>分类描述</th>
+                        <th>显示状态</th>
                     </tr>
                     </thead>
                     <tbody>
+                    <?php if(is_array($list)): foreach($list as $key=>$item): ?><tr>
+                            <td><?php echo ($item["category_name"]); ?></td>
+                            <td><?php echo ($item["category_description"]); ?></td>
+                            <td>
+                                <?php if(($item["display_status"] == 1)): ?><span class="label label-success">显示</span>
+                                    <?php else: ?>
+                                    <span class="label label-danger">隐藏</span><?php endif; ?>
+                            </td>
+                        </tr><?php endforeach; endif; ?>
                     </tbody>
                 </table>
-
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="上一页">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li>
-                            <a href="#" aria-label="下一页">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
             </div>
         </div>
     </div>
@@ -91,11 +82,10 @@
     function logout() {
         $.ajax({
             type: 'post',
-            url: "{:U('Admin/Account/logout')}",
+            url: "<?php echo U('Admin/Account/logout');?>",
             async: false,
             data: {logout: '1'},
             success: function (data) {
-                console.log(data)
                 if (data.code == 200) {
                     location.reload()
                 }
