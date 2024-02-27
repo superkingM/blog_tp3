@@ -8,6 +8,11 @@ namespace Admin\Controller;
 
 class CategoryController extends BaseController
 {
+    public function _initialize()
+    {
+        $this->assign('a_category', 'active');
+        parent::_initialize();
+    }
     /**
      * 分类列表
      * @return void

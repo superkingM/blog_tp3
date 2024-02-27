@@ -1,26 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link href="/Public/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/Public/css/bootstrap-theme.min.css" rel="stylesheet">
-    <script src="/Public/js/jquery.js"></script>
-    <script src="/Public/js/bootstrap.min.js"></script>
-    <title>渡目成书</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>渡目博客登录</title>
+    <meta name="description" content="渡目博客登录">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="icon" type="image/png" href="__PUBLIC__/admin/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="__PUBLIC__/admin/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="登录"/>
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/amazeui.datatables.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/app.css">
+    <script src="__PUBLIC__/admin/js/jquery.min.js"></script>
+
 </head>
-<body>
-<div class="container">
-    <form class="form-signin" method="post" action="{:U('Admin/Account/login')}">
-        <h2 class="form-signin-heading">管理后台</h2>
-        <label for="inputAccount" class="sr-only">账号：</label>
-        <input type="text" id="inputAccount" name="account" class="form-control" placeholder="请输入账号" required
-               autofocus>
-        <label for="inputPassword" class="sr-only">密码：</label>
-        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="请输入密码"
-               required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
-    </form>
+
+<body data-type="login">
+<script src="__PUBLIC__/admin/js/theme.js"></script>
+<div class="am-g tpl-g">
+    <div class="tpl-login">
+        <div class="tpl-login-content">
+            <div class="tpl-login-logo">
+            </div>
+            <form class="am-form tpl-form-line-form" method="post" action="{:U('Admin/Account/login')}">
+                <div class="am-form-group">
+                    <input type="text" class="tpl-form-input" name="account" placeholder="请输入账号">
+                </div>
+                <div class="am-form-group">
+                    <input type="password" class="tpl-form-input" name="password" placeholder="请输入密码">
+                </div>
+                <div class="am-form-group">
+                    <button type="submit"
+                            class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">提交
+                    </button>
+
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+<script src="__PUBLIC__/admin/js/amazeui.min.js"></script>
+<script src="__PUBLIC__/admin/js/app.js"></script>
+
 </body>
+
 </html>
