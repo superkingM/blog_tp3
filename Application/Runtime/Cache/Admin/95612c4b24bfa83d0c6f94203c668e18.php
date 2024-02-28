@@ -134,7 +134,7 @@
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-form-label">分类描述:</label>
                                 <div class="am-u-sm-9">
-                                    <textarea class="" rows="3"
+                                    <textarea class="" rows="5"
                                               placeholder="请输入文章内容" name="category_description"></textarea>
                                 </div>
                             </div>

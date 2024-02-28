@@ -57,6 +57,11 @@ class CategoryController extends BaseController
         }
     }
 
+    /**
+     * 编辑分类
+     * @param $id
+     * @return void
+     */
     public function edit($id)
     {
         $categoryModel = D('Category');
@@ -64,7 +69,7 @@ class CategoryController extends BaseController
             $categoryName = I('post.category_name');
             $categoryDescription = I('post.category_description');
             $displayStatus = I('post.display_status');
-            $category = $categoryModel->where(['id' => ['neq', $id],'category_name'=>$categoryName])->find();
+            $category = $categoryModel->where(['id' => ['neq', $id], 'category_name' => $categoryName])->find();
             if ($category) {
                 $this->error('此分类已经存在，不能修改成此分类');
             }
@@ -84,5 +89,27 @@ class CategoryController extends BaseController
             $this->assign('category', $category);
             $this->display();
         }
+    }
+
+    /**
+     * 删除分类
+     * @return void
+     */
+    public function delete()
+    {
+        if (IS_POST) {
+            $id = I('post.id');
+            $articleModel = D('Article');
+            $article = $articleModel->where(['category_id' => $id])->find();
+            if ($article) {
+                $this->jsonError('此分类下有关联文章不能删除');
+            }
+            $categoryModel = D('Category');
+            $categoryModel->where(['id' => $id])->delete();
+            $this->json();
+        } else {
+            $this->error('请求错误');
+        }
+
     }
 }

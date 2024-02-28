@@ -145,7 +145,8 @@
                                                 <a href="<?php echo U('Admin/Category/edit');?>/id/<?php echo ($item["id"]); ?>">
                                                     <i class="am-icon-pencil"></i> 编辑
                                                 </a>
-                                                <a href="javascript:;" class="tpl-table-black-operation-del">
+                                                <a href="javascript:;" class="tpl-table-black-operation-del"
+                                                   onclick="deleteCategory(<?php echo ($item["id"]); ?>)">
                                                     <i class="am-icon-trash"></i> 删除
                                                 </a>
                                             </div>
@@ -162,6 +163,24 @@
         </div>
     </div>
 </div>
+<script>
+    //删除分类
+    function deleteCategory(id) {
+        $.ajax({
+            type: 'post',
+            url: "<?php echo U('Admin/Category/delete');?>",
+            data: {id: id},
+            async: false,
+            success: function (data) {
+                if (data.code == 200) {
+                    location.reload()
+                } else {
+                    alert(data.msg)
+                }
+            }
+        })
+    }
+</script>
 </div>
 </div>
 <script src="/Public/admin/js/amazeui.min.js"></script>
