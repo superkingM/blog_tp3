@@ -106,109 +106,115 @@
                             <ol class="am-breadcrumb am-breadcrumb-slash">
                                 <li><a href="<?php echo U('Admin/Index/index');?>" class="am-icon-home">首页</a></li>
                                 <li><a href="<?php echo U('Admin/Article/index');?>">文章管理</a></li>
-                                <li class="am-active">文章列表</li>
+                                <li class="am-active">新增文章</li>
                             </ol>
                         </div>
                     </div>
-                    <div class="widget-body  am-fr">
+                    <div class="widget-body am-fr">
 
-                        <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
+                        <form class="am-form tpl-form-border-form tpl-form-border-br" method="post"
+                              action="<?php echo U('Admin/Article/add');?>">
                             <div class="am-form-group">
-                                <div class="am-btn-toolbar">
-                                    <div class="am-btn-group am-btn-group-xs">
-                                        <a type="button" href="<?php echo U('Admin/Article/add');?>"
-                                           class="am-btn am-btn-default am-btn-success"><span
-                                                class="am-icon-plus"></span> 新增</a>
-                                    </div>
+                                <label class="am-u-sm-3 am-form-label">文章标题:</label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" name="title"
+                                           placeholder="请输入文章标题">
                                 </div>
                             </div>
-                        </div>
-                        <form method="get" action="">
-                            <div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
-                                <div class="am-form-group tpl-table-list-select">
-                                    <select data-am-selected="{btnSize: 'sm'}" name="category_id">
-                                        <option value="-1">所有类别</option>
-                                        <?php if(is_array($categoryList)): foreach($categoryList as $key=>$item): if(($item["id"] == $categoryId)): ?><option value="<?php echo ($item["id"]); ?>" selected><?php echo ($item["category_name"]); ?></option>
-                                                <?php else: ?>
-                                                <option value="<?php echo ($item["id"]); ?>"><?php echo ($item["category_name"]); ?></option><?php endif; endforeach; endif; ?>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">文章分类:</label>
+                                <div class="am-u-sm-9">
+                                    <select data-am-selected="{searchBox: 1}" style="display: none;" name="category_id">
+                                        <?php if(is_array($categoryList)): foreach($categoryList as $key=>$item): ?><option value="<?php echo ($item["id"]); ?>"><?php echo ($item["category_name"]); ?></option><?php endforeach; endif; ?>
                                     </select>
                                 </div>
                             </div>
-                            <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
-                                <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
-                                    <input type="text" class="am-form-field " name="keyword"
-                                           placeholder="请输入文章标题" value="<?php echo ($keyword); ?>">
-                                    <span class="am-input-group-btn">
-            <button class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search"
-                    type="submit"></button>
-          </span>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">文章概要:</label>
+                                <div class="am-u-sm-9">
+                                    <textarea class="" rows="3"
+                                              placeholder="请输入文章概要" name="summary"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">显示状态:</label>
+                                <div class="am-u-sm-9">
+                                    <div class="tpl-switch">
+                                        <input type="checkbox" class="ios-switch bigswitch tpl-switch-btn" checked=""
+                                               name="show">
+                                        <div class="tpl-switch-btn-view">
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">内容:</label>
+                                <div class="am-u-sm-9">
+                                    <div id="editor—wrapper">
+                                        <div id="toolbar-container"><!-- 工具栏 --></div>
+                                        <div id="editor-container"><!-- 编辑器 --></div>
+                                    </div>
+                                </div>
+                                <textarea rows="3"
+                                          placeholder="" name="content" id="content" style="display: none"></textarea>
+                            </div>
+
+                            <div class="am-form-group">
+                                <div class="am-u-sm-9 am-u-sm-push-3">
+                                    <button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交
+                                    </button>
                                 </div>
                             </div>
                         </form>
-                        <div class="am-u-sm-12">
-                            <table width="100%"
-                                   class="am-table am-table-striped am-table-compact am-table-bordered am-table-radius tpl-table-black">
-                                <thead>
-                                <tr>
-                                    <th>标题</th>
-                                    <th>分类</th>
-                                    <th>是否显示</th>
-                                    <th>浏览量</th>
-                                    <th>作者</th>
-                                    <th>创建时间</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php if(is_array($list)): foreach($list as $key=>$item): ?><tr>
-                                        <td><?php echo ($item["title"]); ?></td>
-                                        <td><?php echo ($item["category_name"]); ?></td>
-                                        <td>
-                                            <?php if(($item["show"] == 1)): ?><span class="am-badge am-badge-primary">显示</span>
-                                                <?php else: ?>
-                                                <span class="am-badge am-badge-danger">隐藏</span><?php endif; ?>
-                                        </td>
-                                        <td><?php echo ($item["view"]); ?></td>
-                                        <td><?php echo ($item["author"]); ?></td>
-                                        <td>
-                                            <div class="tpl-table-black-operation">
-                                                <a href="<?php echo U('Admin/Category/edit');?>/id/<?php echo ($item["id"]); ?>">
-                                                    <i class="am-icon-pencil"></i> 编辑
-                                                </a>
-                                                <a href="javascript:;" class="tpl-table-black-operation-del"
-                                                   onclick="deleteCategory(<?php echo ($item["id"]); ?>)">
-                                                    <i class="am-icon-trash"></i> 删除
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr><?php endforeach; endif; ?>
-
-                                <!-- more data -->
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script>
-    //删除分类
-    function deleteCategory(id) {
-        $.ajax({
-            type: 'post',
-            url: "<?php echo U('Admin/Category/delete');?>",
-            data: {id: id},
-            async: false,
-            success: function (data) {
-                if (data.code == 200) {
-                    location.reload()
-                } else {
-                    alert(data.msg)
-                }
-            }
-        })
+<link href="/Public/wangeditor/style.css" rel="stylesheet"/>
+<script src="/Public/wangeditor/editor.js"></script>
+<style>
+    #editor—wrapper {
+        border: 1px solid #ccc;
+        z-index: 100; /* 按需定义 */
     }
+    #toolbar-container { border-bottom: 1px solid #ccc; }
+    #editor-container { height: 500px; }
+</style>
+<script >
+    const { createEditor, createToolbar } = window.wangEditor
+
+    const editorConfig = {
+        placeholder: '请输入编辑文章',
+        onChange(editor) {
+            const html = editor.getHtml()
+            console.log('editor content', html)
+            // 也可以同步到 <textarea>
+            document.getElementById('content').value = html
+        }
+    }
+
+    const editor = createEditor({
+        selector: '#editor-container',
+        html: '<p><br></p>',
+        config: editorConfig,
+        mode: 'default', // or 'simple'
+    })
+
+    const toolbarConfig = {}
+
+    const toolbar = createToolbar({
+        editor,
+        selector: '#toolbar-container',
+        config: toolbarConfig,
+        mode: 'default', // or 'simple'
+    })
 </script>
 </div>
 </div>

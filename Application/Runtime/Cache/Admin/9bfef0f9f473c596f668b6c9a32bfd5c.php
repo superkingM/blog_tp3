@@ -86,7 +86,7 @@
                 </a>
             </li>
             <li class="sidebar-nav-link">
-                <a href="<?php echo U('Admin/Article/index');?>" class="<?php echo ($a_article); ?>">
+                <a href="<?php echo U('Admin/Article/index');?>" class="<?php if(isset($a_article)){echo $a_article;}?>">
                     <i class="am-icon-table sidebar-nav-link-logo"></i> 文章管理
                 </a>
             </li>

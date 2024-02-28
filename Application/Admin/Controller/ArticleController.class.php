@@ -30,10 +30,10 @@ class ArticleController extends BaseController
             $articleModel->join('LEFT JOIN category ON article.category_id = category.id');
             $whereMap = [];
             if ($categoryId != -1) {
-                $whereMap['category_id'] = ['eq',$categoryId];
+                $whereMap['category_id'] = ['eq', $categoryId];
             }
             if ($keyword) {
-                $whereMap['title'] = ['like', '%'.$keyword.'%'];
+                $whereMap['title'] = ['like', '%' . $keyword . '%'];
             }
             if (!empty($whereMap)) {
                 $articleModel->where($whereMap);
@@ -48,5 +48,42 @@ class ArticleController extends BaseController
             $this->error('请求错误');
         }
 
+    }
+
+    /**
+     * 新增文章
+     * @return void
+     */
+    public function add()
+    {
+        $categoryModel = D('Category');
+        $categoryList = $categoryModel->select();
+        if (IS_GET) {
+            $this->assign('categoryList', $categoryList);
+            $this->display();
+        } else {
+            $title = I('post.title', 'title');
+            $summary = I('post.summary');
+            $show = I('post.show');
+            $categoryId = I('post.category_id');
+            $content = I('post.content');
+            if ($show == 'on') {
+                $show = 1;
+            } else {
+                $show = 0;
+            }
+            $articleModel = D('Article');
+            $articleModel->add([
+                'title' => $title,
+                'summary' => $summary,
+                'category_id' => $categoryId,
+                'content' => $content,
+                'show' => $show,
+                'view'=>0,
+                'create_time'=>date('Y-m-d H:i:s'),
+                'author'=>session('admin.account')
+            ]);
+            $this->redirect('Admin/Article/index');
+        }
     }
 }
