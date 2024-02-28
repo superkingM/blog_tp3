@@ -28,17 +28,15 @@ class ArticleController extends BaseController
 
             $articleModel = D('Article');
             $articleModel->join('LEFT JOIN category ON article.category_id = category.id');
-            $whereMap = [];
+            $whereMap = ['delete_at' => ['eq' , 0]];
             if ($categoryId != -1) {
                 $whereMap['category_id'] = ['eq', $categoryId];
             }
             if ($keyword) {
                 $whereMap['title'] = ['like', '%' . $keyword . '%'];
             }
-            if (!empty($whereMap)) {
-                $articleModel->where($whereMap);
-            }
-            $list = $articleModel->order('create_time desc')->select();
+            $articleModel->where($whereMap);
+            $list = $articleModel->field('article.*,category.category_name')->order('create_time desc')->select();
             $this->assign('list', $list);
             $this->assign('keyword', $keyword);
             $this->assign('categoryId', $categoryId);
@@ -79,11 +77,69 @@ class ArticleController extends BaseController
                 'category_id' => $categoryId,
                 'content' => $content,
                 'show' => $show,
-                'view'=>0,
-                'create_time'=>date('Y-m-d H:i:s'),
-                'author'=>session('admin.account')
+                'view' => 0,
+                'create_time' => date('Y-m-d H:i:s'),
+                'author' => session('admin.account')
             ]);
             $this->redirect('Admin/Article/index');
+        }
+    }
+
+    /**
+     * 编辑文章
+     * @param $id
+     * @return void
+     */
+    public function edit($id)
+    {
+        $categoryModel = D('Category');
+        $categoryList = $categoryModel->select();
+        $articleModel = D('Article');
+        $article = $articleModel->find($id);
+        if ($article) {
+            $article['content'] = htmlspecialchars_decode($article['content']);
+        }
+        if (IS_POST) {
+            $title = I('post.title', 'title');
+            $summary = I('post.summary');
+            $show = I('post.show');
+            $categoryId = I('post.category_id');
+            $content = I('post.content');
+            if ($show == 'on') {
+                $show = 1;
+            } else {
+                $show = 0;
+            }
+            $articleModel->where(['id' => $id])->save(
+                [
+                    'title' => $title,
+                    'summary' => $summary,
+                    'category_id' => $categoryId,
+                    'content' => $content,
+                    'show' => $show
+                ]
+            );
+            $this->redirect('Admin/Article/index');
+        } else {
+            $this->assign('categoryList', $categoryList);
+            $this->assign('article', $article);
+            $this->display();
+        }
+    }
+
+    /**
+     * 删除文章
+     * @return void
+     */
+    public function delete()
+    {
+        if (IS_POST) {
+            $id = I('post.id');
+            $articleModel = D('Article');
+            $articleModel->where(['id' => $id])->save(['delete_at' => 1]);
+            $this->json();
+        } else {
+            $this->error('请求错误');
         }
     }
 }

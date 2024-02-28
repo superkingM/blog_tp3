@@ -1,0 +1,145 @@
+<layout name="base"/>
+<div class="tpl-content-wrapper">
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title  am-cf">
+                            <ol class="am-breadcrumb am-breadcrumb-slash">
+                                <li><a href="{:U('Admin/Index/index')}" class="am-icon-home">首页</a></li>
+                                <li><a href="{:U('Admin/Article/index')}">文章管理</a></li>
+                                <li class="am-active">编辑文章</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="widget-body am-fr">
+
+                        <form class="am-form tpl-form-border-form tpl-form-border-br" method="post"
+                              action="{:U('Admin/Article/edit')}/id/{$article.id}">
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">文章标题:</label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" name="title"
+                                           placeholder="请输入文章标题" value="{$article.title}">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">文章分类:</label>
+                                <div class="am-u-sm-9">
+                                    <select data-am-selected="{searchBox: 1}" style="display: none;" name="category_id">
+                                        <foreach name="categoryList" item="item">
+                                            <if condition="($article.category_id eq $item.id)">
+                                                <option value="{$item.id}" selected>{$item.category_name}</option>
+                                                <else/>
+                                                <option value="{$item.id}">{$item.category_name}</option>
+                                            </if>
+
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">文章概要:</label>
+                                <div class="am-u-sm-9">
+                                    <textarea class="" rows="3"
+                                              placeholder="请输入文章概要" name="summary">{$article.summary}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">显示状态:</label>
+                                <div class="am-u-sm-9">
+                                    <div class="tpl-switch">
+                                        <if condition="($article.show eq 1)">
+                                            <input type="checkbox" class="ios-switch bigswitch tpl-switch-btn"
+                                                   checked=""
+                                                   name="show">
+                                            <else/>
+                                            <input type="checkbox" class="ios-switch bigswitch tpl-switch-btn"
+                                                   name="show">
+                                        </if>
+
+                                        <div class="tpl-switch-btn-view">
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">内容:</label>
+                                <div class="am-u-sm-9">
+                                    <div id="editor—wrapper">
+                                        <div id="toolbar-container"><!-- 工具栏 --></div>
+                                        <div id="editor-container"><!-- 编辑器 --></div>
+                                    </div>
+                                </div>
+                                <textarea rows="3"
+                                          placeholder="" name="content" id="content" style="display: none"></textarea>
+                            </div>
+
+                            <div class="am-form-group">
+                                <div class="am-u-sm-9 am-u-sm-push-3">
+                                    <button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link href="__PUBLIC__/wangeditor/style.css" rel="stylesheet"/>
+<script src="__PUBLIC__/wangeditor/editor.js"></script>
+<style>
+    #editor—wrapper {
+        border: 1px solid #ccc;
+        z-index: 100; /* 按需定义 */
+    }
+
+    #toolbar-container {
+        border-bottom: 1px solid #ccc;
+    }
+
+    #editor-container {
+        height: 500px;
+    }
+</style>
+<script>
+    const editHtml = "{$article.content}"
+    const {createEditor, createToolbar} = window.wangEditor
+
+    const editorConfig = {
+        placeholder: '请输入编辑文章',
+        onChange(editor) {
+            const html = editor.getHtml()
+            console.log('editor content', html)
+            // 也可以同步到 <textarea>
+            document.getElementById('content').value = html
+        }
+    }
+
+    const editor = createEditor({
+        selector: '#editor-container',
+        html: '<p><br></p>',
+        config: editorConfig,
+        mode: 'default', // or 'simple'
+    })
+
+    editor.setHtml(editHtml)//回显
+    document.getElementById('content').value = editHtml
+
+    const toolbarConfig = {}
+
+    const toolbar = createToolbar({
+        editor,
+        selector: '#toolbar-container',
+        config: toolbarConfig,
+        mode: 'default', // or 'simple'
+    })
+</script>

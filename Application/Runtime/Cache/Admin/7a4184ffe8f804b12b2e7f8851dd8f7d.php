@@ -67,7 +67,7 @@
                 </div>
                 <span class="user-panel-logged-in-text">
               <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
-              禁言小张
+              <?php echo session('admin.account');?>
           </span>
                 <a href="javascript:;" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
             </div>
@@ -171,11 +171,11 @@
                                         <td><?php echo ($item["author"]); ?></td>
                                         <td>
                                             <div class="tpl-table-black-operation">
-                                                <a href="<?php echo U('Admin/Category/edit');?>/id/<?php echo ($item["id"]); ?>">
+                                                <a href="<?php echo U('Admin/Article/edit');?>/id/<?php echo ($item["id"]); ?>">
                                                     <i class="am-icon-pencil"></i> 编辑
                                                 </a>
                                                 <a href="javascript:;" class="tpl-table-black-operation-del"
-                                                   onclick="deleteCategory(<?php echo ($item["id"]); ?>)">
+                                                   onclick="deleteArticle(<?php echo ($item["id"]); ?>)">
                                                     <i class="am-icon-trash"></i> 删除
                                                 </a>
                                             </div>
@@ -193,11 +193,11 @@
     </div>
 </div>
 <script>
-    //删除分类
-    function deleteCategory(id) {
+    //删除文章
+    function deleteArticle(id) {
         $.ajax({
             type: 'post',
-            url: "<?php echo U('Admin/Category/delete');?>",
+            url: "<?php echo U('Admin/Article/delete');?>",
             data: {id: id},
             async: false,
             success: function (data) {

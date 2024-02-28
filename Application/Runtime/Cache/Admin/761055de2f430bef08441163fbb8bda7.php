@@ -67,7 +67,7 @@
                 </div>
                 <span class="user-panel-logged-in-text">
               <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
-              <?php echo session('admin.account');?>
+              禁言小张
           </span>
                 <a href="javascript:;" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
             </div>
@@ -106,26 +106,28 @@
                             <ol class="am-breadcrumb am-breadcrumb-slash">
                                 <li><a href="<?php echo U('Admin/Index/index');?>" class="am-icon-home">首页</a></li>
                                 <li><a href="<?php echo U('Admin/Article/index');?>">文章管理</a></li>
-                                <li class="am-active">新增文章</li>
+                                <li class="am-active">编辑文章</li>
                             </ol>
                         </div>
                     </div>
                     <div class="widget-body am-fr">
 
                         <form class="am-form tpl-form-border-form tpl-form-border-br" method="post"
-                              action="<?php echo U('Admin/Article/add');?>">
+                              action="<?php echo U('Admin/Article/edit');?>/id/<?php echo ($article["id"]); ?>">
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-form-label">文章标题:</label>
                                 <div class="am-u-sm-9">
                                     <input type="text" class="tpl-form-input" name="title"
-                                           placeholder="请输入文章标题">
+                                           placeholder="请输入文章标题" value="<?php echo ($article["title"]); ?>">
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label class="am-u-sm-3 am-form-label">文章分类:</label>
                                 <div class="am-u-sm-9">
                                     <select data-am-selected="{searchBox: 1}" style="display: none;" name="category_id">
-                                        <?php if(is_array($categoryList)): foreach($categoryList as $key=>$item): ?><option value="<?php echo ($item["id"]); ?>"><?php echo ($item["category_name"]); ?></option><?php endforeach; endif; ?>
+                                        <?php if(is_array($categoryList)): foreach($categoryList as $key=>$item): if(($article["category_id"] == $item.id)): ?><option value="<?php echo ($item["id"]); ?>" selected><?php echo ($item["category_name"]); ?></option>
+                                                <?php else: ?>
+                                                <option value="<?php echo ($item["id"]); ?>"><?php echo ($item["category_name"]); ?></option><?php endif; endforeach; endif; ?>
                                     </select>
                                 </div>
                             </div>
@@ -133,7 +135,7 @@
                                 <label class="am-u-sm-3 am-form-label">文章概要:</label>
                                 <div class="am-u-sm-9">
                                     <textarea class="" rows="3"
-                                              placeholder="请输入文章概要" name="summary"></textarea>
+                                              placeholder="请输入文章概要" name="summary"><?php echo ($article["summary"]); ?></textarea>
                                 </div>
                             </div>
 
@@ -141,8 +143,13 @@
                                 <label class="am-u-sm-3 am-form-label">显示状态:</label>
                                 <div class="am-u-sm-9">
                                     <div class="tpl-switch">
-                                        <input type="checkbox" class="ios-switch bigswitch tpl-switch-btn" checked=""
-                                               name="show">
+                                        <?php if(($article["show"] == 1)): ?><input type="checkbox" class="ios-switch bigswitch tpl-switch-btn"
+                                                   checked=""
+                                                   name="show">
+                                            <?php else: ?>
+                                            <input type="checkbox" class="ios-switch bigswitch tpl-switch-btn"
+                                                   name="show"><?php endif; ?>
+
                                         <div class="tpl-switch-btn-view">
                                             <div>
                                             </div>
@@ -184,11 +191,18 @@
         border: 1px solid #ccc;
         z-index: 100; /* 按需定义 */
     }
-    #toolbar-container { border-bottom: 1px solid #ccc; }
-    #editor-container { height: 500px; }
+
+    #toolbar-container {
+        border-bottom: 1px solid #ccc;
+    }
+
+    #editor-container {
+        height: 500px;
+    }
 </style>
-<script >
-    const { createEditor, createToolbar } = window.wangEditor
+<script>
+    const editHtml = "<?php echo ($article["content"]); ?>"
+    const {createEditor, createToolbar} = window.wangEditor
 
     const editorConfig = {
         placeholder: '请输入编辑文章',
@@ -206,6 +220,9 @@
         config: editorConfig,
         mode: 'default', // or 'simple'
     })
+
+    editor.setHtml(editHtml)//回显
+    document.getElementById('content').value = editHtml
 
     const toolbarConfig = {}
 
