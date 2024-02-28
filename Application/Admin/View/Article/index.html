@@ -1,0 +1,123 @@
+<layout name="base"/>
+<div class="tpl-content-wrapper">
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title  am-cf">
+                            <ol class="am-breadcrumb am-breadcrumb-slash">
+                                <li><a href="{:U('Admin/Index/index')}" class="am-icon-home">首页</a></li>
+                                <li><a href="{:U('Admin/Article/index')}">文章管理</a></li>
+                                <li class="am-active">文章列表</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="widget-body  am-fr">
+
+                        <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
+                            <div class="am-form-group">
+                                <div class="am-btn-toolbar">
+                                    <div class="am-btn-group am-btn-group-xs">
+                                        <a type="button" href="{:U('Admin/Category/add')}"
+                                           class="am-btn am-btn-default am-btn-success"><span
+                                                class="am-icon-plus"></span> 新增</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <form method="get" action="">
+                            <div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
+                                <div class="am-form-group tpl-table-list-select">
+                                    <select data-am-selected="{btnSize: 'sm'}" name="category_id">
+                                        <option value="-1">所有类别</option>
+                                        <foreach name="categoryList" item="item">
+                                            <if condition="($item.id eq $categoryId)">
+                                                <option value="{$item.id}" selected>{$item.category_name}</option>
+                                                <else/>
+                                                <option value="{$item.id}">{$item.category_name}</option>
+                                            </if>
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
+                                <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
+                                    <input type="text" class="am-form-field " name="keyword"
+                                           placeholder="请输入文章标题" value="{$keyword}">
+                                    <span class="am-input-group-btn">
+            <button class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search"
+                    type="submit"></button>
+          </span>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="am-u-sm-12">
+                            <table width="100%"
+                                   class="am-table am-table-striped am-table-compact am-table-bordered am-table-radius tpl-table-black">
+                                <thead>
+                                <tr>
+                                    <th>标题</th>
+                                    <th>分类</th>
+                                    <th>是否显示</th>
+                                    <th>浏览量</th>
+                                    <th>作者</th>
+                                    <th>创建时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <foreach name="list" item="item">
+                                    <tr>
+                                        <td>{$item.title}</td>
+                                        <td>{$item.category_name}</td>
+                                        <td>
+                                            <if condition="($item.show eq 1)">
+                                                <span class="am-badge am-badge-primary">显示</span>
+                                                <else/>
+                                                <span class="am-badge am-badge-danger">隐藏</span>
+                                            </if>
+                                        </td>
+                                        <td>{$item.view}</td>
+                                        <td>{$item.author}</td>
+                                        <td>
+                                            <div class="tpl-table-black-operation">
+                                                <a href="{:U('Admin/Category/edit')}/id/{$item.id}">
+                                                    <i class="am-icon-pencil"></i> 编辑
+                                                </a>
+                                                <a href="javascript:;" class="tpl-table-black-operation-del"
+                                                   onclick="deleteCategory({$item.id})">
+                                                    <i class="am-icon-trash"></i> 删除
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </foreach>
+
+                                <!-- more data -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //删除分类
+    function deleteCategory(id) {
+        $.ajax({
+            type: 'post',
+            url: "{:U('Admin/Category/delete')}",
+            data: {id: id},
+            async: false,
+            success: function (data) {
+                if (data.code == 200) {
+                    location.reload()
+                } else {
+                    alert(data.msg)
+                }
+            }
+        })
+    }
+</script>

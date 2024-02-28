@@ -86,7 +86,7 @@
                 </a>
             </li>
             <li class="sidebar-nav-link">
-                <a href="<?php echo U('Admin/Article/index');?>" class="<?php echo ($a_article); ?>">
+                <a href="<?php echo U('Admin/Article/index');?>" class="<?php if(isset($a_article)){echo $a_article;}?>">
                     <i class="am-icon-table sidebar-nav-link-logo"></i> 文章管理
                 </a>
             </li>
@@ -105,8 +105,8 @@
                         <div class="widget-title  am-cf">
                             <ol class="am-breadcrumb am-breadcrumb-slash">
                                 <li><a href="<?php echo U('Admin/Index/index');?>" class="am-icon-home">首页</a></li>
-                                <li><a href="<?php echo U('Admin/Category/index');?>">分类管理</a></li>
-                                <li class="am-active">分类列表</li>
+                                <li><a href="<?php echo U('Admin/Article/index');?>">文章管理</a></li>
+                                <li class="am-active">文章列表</li>
                             </ol>
                         </div>
                     </div>
@@ -123,28 +123,52 @@
                                 </div>
                             </div>
                         </div>
-
+                        <form method="get" action="">
+                            <div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
+                                <div class="am-form-group tpl-table-list-select">
+                                    <select data-am-selected="{btnSize: 'sm'}" name="category_id">
+                                        <option value="-1">所有类别</option>
+                                        <?php if(is_array($categoryList)): foreach($categoryList as $key=>$item): if(($item["id"] == $categoryId)): ?><option value="<?php echo ($item["id"]); ?>" selected><?php echo ($item["category_name"]); ?></option>
+                                                <?php else: ?>
+                                                <option value="<?php echo ($item["id"]); ?>"><?php echo ($item["category_name"]); ?></option><?php endif; endforeach; endif; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
+                                <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
+                                    <input type="text" class="am-form-field " name="keyword"
+                                           placeholder="请输入文章标题" value="<?php echo ($keyword); ?>">
+                                    <span class="am-input-group-btn">
+            <button class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search"
+                    type="submit"></button>
+          </span>
+                                </div>
+                            </div>
+                        </form>
                         <div class="am-u-sm-12">
                             <table width="100%"
                                    class="am-table am-table-striped am-table-compact am-table-bordered am-table-radius tpl-table-black">
                                 <thead>
                                 <tr>
-                                    <th>分类名称</th>
-                                    <th>分类描述</th>
-                                    <th>分类状态</th>
-                                    <th>操作</th>
+                                    <th>标题</th>
+                                    <th>分类</th>
+                                    <th>是否显示</th>
+                                    <th>浏览量</th>
+                                    <th>作者</th>
+                                    <th>创建时间</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php if(is_array($list)): foreach($list as $key=>$item): ?><tr>
+                                        <td><?php echo ($item["title"]); ?></td>
                                         <td><?php echo ($item["category_name"]); ?></td>
-                                        <td><?php echo ($item["category_description"]); ?></td>
                                         <td>
-                                            <?php if(($item["display_status"] == 1)): ?><span class="am-badge am-badge-primary">显示</span>
+                                            <?php if(($item["show"] == 1)): ?><span class="am-badge am-badge-primary">显示</span>
                                                 <?php else: ?>
                                                 <span class="am-badge am-badge-danger">隐藏</span><?php endif; ?>
-
                                         </td>
+                                        <td><?php echo ($item["view"]); ?></td>
+                                        <td><?php echo ($item["author"]); ?></td>
                                         <td>
                                             <div class="tpl-table-black-operation">
                                                 <a href="<?php echo U('Admin/Category/edit');?>/id/<?php echo ($item["id"]); ?>">
