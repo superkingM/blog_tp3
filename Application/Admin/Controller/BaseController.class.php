@@ -8,6 +8,9 @@ namespace Admin\Controller;
 
 use Think\Controller;
 
+/**
+ * 后台基控制器
+ */
 class BaseController extends Controller
 {
     /** @var int 接口状态码 */

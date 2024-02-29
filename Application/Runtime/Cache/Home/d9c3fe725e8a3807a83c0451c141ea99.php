@@ -56,8 +56,8 @@
             </div>
         </article><?php endforeach; endif; ?>
     <ul class="am-pagination">
-        <li class="am-pagination-prev"><a href="<?php echo U('Home/Index/index');?>?page=<?php echo ($prev); ?>">&laquo; 上一页</a></li>
-        <li class="am-pagination-next"><a href="<?php echo U('Home/Index/index');?>?page=<?php echo ($next); ?>">下一页 &raquo;</a></li>
+        <li class="am-pagination-prev"><a href="<?php echo U('Home/Index/category');?>/id/<?php echo ($id); ?>?page=<?php echo ($prev); ?>">&laquo; 上一页</a></li>
+        <li class="am-pagination-next"><a href="<?php echo U('Home/Index/category');?>/id/<?php echo ($id); ?>?page=<?php echo ($next); ?>">下一页 &raquo;</a></li>
     </ul>
 </div>
 

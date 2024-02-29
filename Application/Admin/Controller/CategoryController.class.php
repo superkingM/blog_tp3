@@ -5,7 +5,9 @@
  */
 
 namespace Admin\Controller;
-
+/**
+ * 分类控制器
+ */
 class CategoryController extends BaseController
 {
     public function _initialize()

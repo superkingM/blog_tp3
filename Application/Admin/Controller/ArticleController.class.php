@@ -5,7 +5,9 @@
  */
 
 namespace Admin\Controller;
-
+/**
+ * 文章相关控制器
+ */
 class ArticleController extends BaseController
 {
     public function _initialize()

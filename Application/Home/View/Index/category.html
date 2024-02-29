@@ -13,7 +13,7 @@
         </article>
     </foreach>
     <ul class="am-pagination">
-        <li class="am-pagination-prev"><a href="{:U('Home/Index/index')}?page={$prev}">&laquo; 上一页</a></li>
-        <li class="am-pagination-next"><a href="{:U('Home/Index/index')}?page={$next}">下一页 &raquo;</a></li>
+        <li class="am-pagination-prev"><a href="{:U('Home/Index/category')}/id/{$id}?page={$prev}">&laquo; 上一页</a></li>
+        <li class="am-pagination-next"><a href="{:U('Home/Index/category')}/id/{$id}?page={$next}">下一页 &raquo;</a></li>
     </ul>
 </div>

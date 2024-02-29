@@ -67,7 +67,7 @@
                 </div>
                 <span class="user-panel-logged-in-text">
               <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
-              禁言小张
+              <?php echo session('admin.account');?>
           </span>
                 <a href="javascript:;" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
             </div>
@@ -86,7 +86,7 @@
                 </a>
             </li>
             <li class="sidebar-nav-link">
-                <a href="<?php echo U('Admin/Article/index');?>" class="<?php echo ($a_article); ?>">
+                <a href="<?php echo U('Admin/Article/index');?>" class="<?php if(isset($a_article)){echo $a_article;}?>">
                     <i class="am-icon-table sidebar-nav-link-logo"></i> 文章管理
                 </a>
             </li>

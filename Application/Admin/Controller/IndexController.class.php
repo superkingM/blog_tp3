@@ -1,7 +1,9 @@
 <?php
 
 namespace Admin\Controller;
-
+/**
+ * 后台默认控制器
+ */
 class IndexController extends BaseController
 {
     public function _initialize()

@@ -1,12 +1,108 @@
+<!doctype html>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>标题</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>渡目博客</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="icon" type="image/png" href="__PUBLIC__/blog/i/favicon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="__PUBLIC__/blog/i/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+  <link rel="apple-touch-icon-precomposed" href="__PUBLIC__/blog/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileImage" content="__PUBLIC__/blog/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileColor" content="#0e90d2">
+  <link rel="stylesheet" href="__PUBLIC__/blog/css/amazeui.min.css">
+  <link rel="stylesheet" href="__PUBLIC__/blog/css/app.css">
 </head>
-<body>
-<h2>{$title}</h2>
-<p>内容</p>
-{__CONTENT__}
-<p>页脚</p>
+
+<body id="blog">
+<nav class="am-g am-g-fixed blog-fixed blog-nav">
+  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only blog-button" data-am-collapse="{target: '#blog-collapse'}" ><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+  <div class="am-collapse am-topbar-collapse" id="blog-collapse">
+    <ul class="am-nav am-nav-pills am-topbar-nav">
+      <li class="<?php if(isset($a_home)){echo $a_home;}?>"><a href="{:U('Home/Index/index')}">首页</a></li>
+      <foreach name="categoryList" item="item">
+        <li class="{$item.active}"><a href="{:U('Home/Index/category')}/id/{$item.id}">{$item.category_name}</a></li>
+      </foreach>
+    </ul>
+    <form class="am-topbar-form am-topbar-right am-form-inline" role="search">
+      <div class="am-form-group">
+        <input type="text" class="am-form-field am-input-sm" placeholder="搜索">
+      </div>
+    </form>
+  </div>
+</nav>
+<hr>
+
+
+<!-- content srart -->
+<div class="am-g am-g-fixed blog-fixed">
+  {__CONTENT__}
+
+  <div class="am-u-md-4 am-u-sm-12 blog-sidebar">
+    <div class="blog-sidebar-widget blog-bor">
+      <h2 class="blog-text-center blog-title"><span>About ME</span></h2>
+      <img src="__PUBLIC__/blog/i/f14.jpg" alt="about me" class="blog-entry-img" >
+      <p>妹纸</p>
+      <p>
+        我是妹子UI，中国首个开源 HTML5 跨屏前端框架
+      </p><p>我不想成为一个庸俗的人。十年百年后，当我们死去，质疑我们的人同样死去，后人看到的是裹足不前、原地打转的你，还是一直奔跑、走到远方的我？</p>
+    </div>
+    <div class="blog-sidebar-widget blog-bor">
+      <h2 class="blog-text-center blog-title"><span>Contact ME</span></h2>
+      <p>
+        <a href=""><span class="am-icon-qq am-icon-fw am-primary blog-icon"></span></a>
+        <a href=""><span class="am-icon-github am-icon-fw blog-icon"></span></a>
+        <a href=""><span class="am-icon-weibo am-icon-fw blog-icon"></span></a>
+        <a href=""><span class="am-icon-reddit am-icon-fw blog-icon"></span></a>
+        <a href=""><span class="am-icon-weixin am-icon-fw blog-icon"></span></a>
+      </p>
+    </div>
+    <div class="blog-clear-margin blog-sidebar-widget blog-bor am-g ">
+      <h2 class="blog-title"><span>TAG cloud</span></h2>
+      <div class="am-u-sm-12 blog-clear-padding">
+        <a href="" class="blog-tag">amaze</a>
+        <a href="" class="blog-tag">妹纸 UI</a>
+        <a href="" class="blog-tag">HTML5</a>
+        <a href="" class="blog-tag">这是标签</a>
+        <a href="" class="blog-tag">Impossible</a>
+        <a href="" class="blog-tag">开源前端框架</a>
+      </div>
+    </div>
+    <div class="blog-sidebar-widget blog-bor">
+      <h2 class="blog-title"><span>么么哒</span></h2>
+      <ul class="am-list">
+        <li><a href="#">每个人都有一个死角， 自己走不出来，别人也闯不进去。</a></li>
+        <li><a href="#">我把最深沉的秘密放在那里。</a></li>
+        <li><a href="#">你不懂我，我不怪你。</a></li>
+        <li><a href="#">每个人都有一道伤口， 或深或浅，盖上布，以为不存在。</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- content end -->
+
+
+
+
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="__PUBLIC__/blog/js/jquery.min.js"></script>
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script src="__PUBLIC__/admin/js/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="__PUBLIC__/blog/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+<script src="__PUBLIC__/blog/js/amazeui.min.js"></script>
+<!-- <script src="assets/js/app.js"></script> -->
 </body>
 </html>

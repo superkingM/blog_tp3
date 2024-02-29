@@ -8,6 +8,9 @@ namespace Admin\Controller;
 
 use Think\Controller;
 
+/**
+ * 账户相关控制器
+ */
 class AccountController extends Controller
 {
     /**
