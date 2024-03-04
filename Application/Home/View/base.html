@@ -85,6 +85,14 @@
         </foreach>
       </ul>
     </div>
+    <div class="blog-sidebar-widget blog-bor">
+      <h2 class="blog-title"><span>最新评论</span></h2>
+      <ul class="am-list">
+        <foreach name="latestCommentList" item="item">
+          <li><a href="{:U('Home/Index/article')}/id/{$item.article_id}">{$item.comment}</a></li>
+        </foreach>
+      </ul>
+    </div>
   </div>
 </div>
 <!-- content end -->

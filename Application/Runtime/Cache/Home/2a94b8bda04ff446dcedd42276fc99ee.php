@@ -97,6 +97,12 @@
         <?php if(is_array($hotArticleList)): foreach($hotArticleList as $key=>$item): ?><li><a href="<?php echo U('Home/Index/article');?>/id/<?php echo ($item["id"]); ?>"><?php echo ($item["title"]); ?></a></li><?php endforeach; endif; ?>
       </ul>
     </div>
+    <div class="blog-sidebar-widget blog-bor">
+      <h2 class="blog-title"><span>最新评论</span></h2>
+      <ul class="am-list">
+        <?php if(is_array($latestCommentList)): foreach($latestCommentList as $key=>$item): ?><li><a href="<?php echo U('Home/Index/article');?>/id/<?php echo ($item["article_id"]); ?>"><?php echo ($item["comment"]); ?></a></li><?php endforeach; endif; ?>
+      </ul>
+    </div>
   </div>
 </div>
 <!-- content end -->
