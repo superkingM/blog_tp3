@@ -80,4 +80,26 @@ class IndexController extends Controller
         $this->assign('id', $id);
         $this->display();
     }
+
+    /**
+     * 文章详情
+     * @param $id
+     * @return void
+     */
+    public function article($id)
+    {
+        $articleModel = D('Article');
+        $article = $articleModel->join('LEFT JOIN category ON article.category_id = category.id')
+            ->where(['show' => 1, 'article.id' => $id])
+            ->field('article.*,category.category_name,category.id as cate_id')
+            ->find();
+        if (!$article) {
+            $this->error('此文章不存在');
+        } else {
+            $content = htmlspecialchars_decode($article['content']);
+            $this->assign('content', $content);
+        }
+        $this->assign('article', $article);
+        $this->display();
+    }
 }

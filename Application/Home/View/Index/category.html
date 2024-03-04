@@ -6,7 +6,7 @@
                 <span><a href="{:U('Home/Index/category')}/id/{$item.category_id}" class="blog-color">{$item.category_name}</a></span>
                 <span> @{$item.author}</span>
                 <span>{$item.create_time|substr=0,10}</span>
-                <h1><a href="">{$item.title}</a></h1>
+                <h1><a href="{:U('Home/Index/article')}/id/{$item.id}">{$item.title}</a></h1>
                 <p>{$item.summary}</p>
                 <p><a href="" class="blog-continue">continue reading</a></p>
             </div>

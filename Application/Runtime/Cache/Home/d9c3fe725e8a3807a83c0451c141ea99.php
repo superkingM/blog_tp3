@@ -50,7 +50,7 @@
                 <span><a href="<?php echo U('Home/Index/category');?>/id/<?php echo ($item["category_id"]); ?>" class="blog-color"><?php echo ($item["category_name"]); ?></a></span>
                 <span> @<?php echo ($item["author"]); ?></span>
                 <span><?php echo (substr($item["create_time"],0,10)); ?></span>
-                <h1><a href=""><?php echo ($item["title"]); ?></a></h1>
+                <h1><a href="<?php echo U('Home/Index/article');?>/id/<?php echo ($item["id"]); ?>"><?php echo ($item["title"]); ?></a></h1>
                 <p><?php echo ($item["summary"]); ?></p>
                 <p><a href="" class="blog-continue">continue reading</a></p>
             </div>
@@ -65,10 +65,10 @@
     <div class="blog-sidebar-widget blog-bor">
       <h2 class="blog-text-center blog-title"><span>About ME</span></h2>
       <img src="/Public/blog/i/f14.jpg" alt="about me" class="blog-entry-img" >
-      <p>妹纸</p>
+      <p>ThinkPHP3.2.5</p>
       <p>
-        我是妹子UI，中国首个开源 HTML5 跨屏前端框架
-      </p><p>我不想成为一个庸俗的人。十年百年后，当我们死去，质疑我们的人同样死去，后人看到的是裹足不前、原地打转的你，还是一直奔跑、走到远方的我？</p>
+        博客系统
+      </p><p></p>
     </div>
     <div class="blog-sidebar-widget blog-bor">
       <h2 class="blog-text-center blog-title"><span>Contact ME</span></h2>
