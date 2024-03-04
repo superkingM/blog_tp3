@@ -72,44 +72,37 @@
     <hr>
     <div class="am-g blog-author blog-article-margin">
         <div class="am-u-sm-3 am-u-md-3 am-u-lg-2">
-            <img src="assets/i/f15.jpg" alt="" class="blog-author-img am-circle">
+            <img src="/Public/admin/img/logob.png" alt="" class="blog-author-img am-circle">
         </div>
         <div class="am-u-sm-9 am-u-md-9 am-u-lg-10">
             <h3><span>作者 &nbsp;: &nbsp;</span><span class="blog-color"><?php echo ($article["author"]); ?></span></h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>渡目博客</p>
         </div>
     </div>
     <hr>
-    <ul class="am-pagination blog-article-margin">
-        <li class="am-pagination-prev"><a href="#" class="">&laquo; 一切的回顾</a></li>
-        <li class="am-pagination-next"><a href="">不远的未来 &raquo;</a></li>
-    </ul>
-
-    <hr>
-
     <form class="am-form am-g">
-        <h3 class="blog-comment">评论</h3>
         <fieldset>
             <div class="am-form-group am-u-sm-4 blog-clear-left">
-                <input type="text" class="" placeholder="名字">
+                <input type="text" class="" placeholder="名字" name="name">
             </div>
             <div class="am-form-group am-u-sm-4">
-                <input type="email" class="" placeholder="邮箱">
+                <input type="email" class="" placeholder="邮箱" name="email">
             </div>
-
-            <div class="am-form-group am-u-sm-4 blog-clear-right">
-                <input type="password" class="" placeholder="网站">
-            </div>
-
             <div class="am-form-group">
-                <textarea class="" rows="5" placeholder="一字千金"></textarea>
+                <textarea class="" rows="5" placeholder="一字千金" name="comment"></textarea>
             </div>
 
             <p><button type="submit" class="am-btn am-btn-default">发表评论</button></p>
         </fieldset>
     </form>
-
-    <hr>
+    <div class="am-g blog-article-widget blog-article-margin">
+        <div class="blog-sidebar-widget blog-bor">
+            <h2 class="blog-title"><span>评论</span></h2>
+            <ul class="am-list">
+                <?php if(is_array($commentList)): foreach($commentList as $key=>$item): ?><li>【<?php echo ($item["name"]); ?>:<?php echo (substr($item["create_time"],0,10)); ?>】<?php echo ($item["comment"]); ?></li><?php endforeach; endif; ?>
+            </ul>
+        </div>
+    </div>
 </div>
 
   <div class="am-u-md-4 am-u-sm-12 blog-sidebar">
@@ -143,12 +136,9 @@
       </div>
     </div>
     <div class="blog-sidebar-widget blog-bor">
-      <h2 class="blog-title"><span>么么哒</span></h2>
+      <h2 class="blog-title"><span>最热文章</span></h2>
       <ul class="am-list">
-        <li><a href="#">每个人都有一个死角， 自己走不出来，别人也闯不进去。</a></li>
-        <li><a href="#">我把最深沉的秘密放在那里。</a></li>
-        <li><a href="#">你不懂我，我不怪你。</a></li>
-        <li><a href="#">每个人都有一道伤口， 或深或浅，盖上布，以为不存在。</a></li>
+        <?php if(is_array($hotArticleList)): foreach($hotArticleList as $key=>$item): ?><li><a href="<?php echo U('Home/Index/article');?>/id/<?php echo ($item["id"]); ?>"><?php echo ($item["title"]); ?></a></li><?php endforeach; endif; ?>
       </ul>
     </div>
   </div>

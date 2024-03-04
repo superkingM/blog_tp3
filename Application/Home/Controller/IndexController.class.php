@@ -13,6 +13,9 @@ class IndexController extends Controller
         foreach ($categoryList as &$item) {
             $item['active'] = '';
         }
+        $articleModel = D('Article');
+        $hotArticleList = $articleModel->where(['show'=>1])->order('view desc')->limit(5)->select();
+        $this->assign('hotArticleList', $hotArticleList);
         $this->assign('categoryList', $categoryList);
     }
 
@@ -96,6 +99,20 @@ class IndexController extends Controller
         if (!$article) {
             $this->error('此文章不存在');
         } else {
+            $params = I('get.');
+            $commentModel = D('Comment');
+            if (array_key_exists('name', $params) && !empty($params['name']) && array_key_exists('email', $params) && !empty($params['email']) && array_key_exists('comment', $params) && !empty($params['comment'])) {
+                $commentModel->add([
+                    'article_id' => $id,
+                    'name' => $params['name'],
+                    'email' => $params['email'],
+                    'comment' => $params['comment'],
+                    'create_time' => date('Y-m-d H:i:s')
+                ]);
+            }
+            $commentList = $commentModel->where(['article_id' => $id, 'status' => 1])->select();
+            $this->assign('commentList', $commentList);
+            $articleModel->where(['id' => $id])->setInc('view');
             $content = htmlspecialchars_decode($article['content']);
             $this->assign('content', $content);
         }
