@@ -20,3 +20,22 @@
 - [x] 文章详情
 - [x] 最热文章
 - [ ] 最新评论
+
+## 页面效果
+
+### 前端
+- 首页和分类页文章列表
+
+![首页和分类页文章列表](/Public/pic/index.png)
+
+- 文章详细页
+
+![文章详细页](/Public/pic/article.png)
+
+### 后端
+
+- 分类管理
+![分类管理](/Public/pic/cate.png)
+- 文章管理
+![文章管理](/Public/pic/admin_article.png)
+![新增、编辑文章](/Public/pic/add_article.png)

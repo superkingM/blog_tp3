@@ -124,7 +124,7 @@
         <a href=""><span class="am-icon-weixin am-icon-fw blog-icon"></span></a>
       </p>
     </div>
-    <div class="blog-clear-margin blog-sidebar-widget blog-bor am-g ">
+    <!--<div class="blog-clear-margin blog-sidebar-widget blog-bor am-g ">
       <h2 class="blog-title"><span>TAG cloud</span></h2>
       <div class="am-u-sm-12 blog-clear-padding">
         <a href="" class="blog-tag">amaze</a>
@@ -134,7 +134,7 @@
         <a href="" class="blog-tag">Impossible</a>
         <a href="" class="blog-tag">开源前端框架</a>
       </div>
-    </div>
+    </div>-->
     <div class="blog-sidebar-widget blog-bor">
       <h2 class="blog-title"><span>最热文章</span></h2>
       <ul class="am-list">

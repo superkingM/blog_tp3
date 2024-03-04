@@ -80,7 +80,7 @@
         <a href=""><span class="am-icon-weixin am-icon-fw blog-icon"></span></a>
       </p>
     </div>
-    <div class="blog-clear-margin blog-sidebar-widget blog-bor am-g ">
+    <!--<div class="blog-clear-margin blog-sidebar-widget blog-bor am-g ">
       <h2 class="blog-title"><span>TAG cloud</span></h2>
       <div class="am-u-sm-12 blog-clear-padding">
         <a href="" class="blog-tag">amaze</a>
@@ -90,14 +90,11 @@
         <a href="" class="blog-tag">Impossible</a>
         <a href="" class="blog-tag">开源前端框架</a>
       </div>
-    </div>
+    </div>-->
     <div class="blog-sidebar-widget blog-bor">
-      <h2 class="blog-title"><span>么么哒</span></h2>
+      <h2 class="blog-title"><span>最热文章</span></h2>
       <ul class="am-list">
-        <li><a href="#">每个人都有一个死角， 自己走不出来，别人也闯不进去。</a></li>
-        <li><a href="#">我把最深沉的秘密放在那里。</a></li>
-        <li><a href="#">你不懂我，我不怪你。</a></li>
-        <li><a href="#">每个人都有一道伤口， 或深或浅，盖上布，以为不存在。</a></li>
+        <?php if(is_array($hotArticleList)): foreach($hotArticleList as $key=>$item): ?><li><a href="<?php echo U('Home/Index/article');?>/id/<?php echo ($item["id"]); ?>"><?php echo ($item["title"]); ?></a></li><?php endforeach; endif; ?>
       </ul>
     </div>
   </div>
