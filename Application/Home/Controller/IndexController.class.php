@@ -17,7 +17,7 @@ class IndexController extends Controller
         $hotArticleList = $articleModel->where(['show' => 1])->order('view desc')->limit(5)->select();
 
         $commentModel = D('Comment');
-        $latestCommentList = $commentModel->order('create_time desc')->limit(5)->select();
+        $latestCommentList = $commentModel->join('article ON comment.article_id = article.id')->where(['article.delete_at'=>0])->limit(5)->select();
         $this->assign('latestCommentList', $latestCommentList);
         $this->assign('hotArticleList', $hotArticleList);
         $this->assign('categoryList', $categoryList);
