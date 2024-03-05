@@ -90,6 +90,12 @@
                     <i class="am-icon-table sidebar-nav-link-logo"></i> 文章管理
                 </a>
             </li>
+            <li class="sidebar-nav-link">
+                <a href="<?php echo U('Admin/Comment/index');?>" class="<?php if(isset($a_comment)){echo $a_comment;}?>">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 评论管理
+                </a>
+            </li>
+
         </ul>
     </div>
 

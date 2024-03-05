@@ -1,0 +1,120 @@
+<layout name="base"/>
+<div class="tpl-content-wrapper">
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title  am-cf">
+                            <ol class="am-breadcrumb am-breadcrumb-slash">
+                                <li><a href="{:U('Admin/Index/index')}" class="am-icon-home">首页</a></li>
+                                <li><a href="{:U('Admin/Comment/index')}">评论管理</a></li>
+                                <li class="am-active">评论列表</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="widget-body  am-fr">
+                        <form method="get" action="">
+                            <div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
+                            </div>
+                            <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
+                                <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
+                                    <input type="text" class="am-form-field " name="keyword"
+                                           placeholder="请输入评论" value="{$keyword}">
+                                    <span class="am-input-group-btn">
+            <button class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search"
+                    type="submit"></button>
+          </span>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="am-u-sm-12">
+                            <table width="100%"
+                                   class="am-table am-table-striped am-table-compact am-table-bordered am-table-radius tpl-table-black">
+                                <thead>
+                                <tr>
+                                    <th>名称</th>
+                                    <th>邮箱</th>
+                                    <th>文章标题</th>
+                                    <th>评论内容</th>
+                                    <th>状态</th>
+                                    <th>ip</th>
+                                    <th>创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <foreach name="commentList" item="item">
+                                    <tr>
+                                        <td>{$item.name}</td>
+                                        <td>{$item.email}</td>
+                                        <td><a href="{:U('Home/Index/article')}/id/{$item.art_id}"
+                                               class="am-badge am-badge-primary">{$item.title}</a></td>
+                                        <td>{$item.comment}</td>
+                                        <td>
+                                            <if condition="($item.status eq 1)">
+                                                <span class="am-badge am-badge-primary" style="cursor: pointer"
+                                                      onclick="stateComment({$item.id})">显示</span>
+                                                <else/>
+                                                <span class="am-badge am-badge-danger" style="cursor: pointer"
+                                                      onclick="stateComment({$item.id})">隐藏</span>
+                                            </if>
+                                        </td>
+                                        <td>{$item.ip}</td>
+                                        <td>{$item.create_time|substr=0,10}</td>
+                                        <td>
+                                            <div class="tpl-table-black-operation">
+                                                <a href="javascript:;" class="tpl-table-black-operation-del"
+                                                   onclick="deleteComment({$item.id})">
+                                                    <i class="am-icon-trash"></i> 删除
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </foreach>
+
+                                <!-- more data -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //删除文章
+    function deleteComment(id) {
+        $.ajax({
+            type: 'post',
+            url: "{:U('Admin/Comment/delete')}",
+            data: {id: id},
+            async: false,
+            success: function (data) {
+                if (data.code == 200) {
+                    location.reload()
+                } else {
+                    alert(data.msg)
+                }
+            }
+        })
+    }
+
+    //修改评论状态
+    function stateComment(id) {
+        $.ajax({
+            type: 'post',
+            url: "{:U('Admin/Comment/state')}",
+            data: {id: id},
+            async: false,
+            success: function (data) {
+                if (data.code == 200) {
+                    location.reload()
+                } else {
+                    alert(data.msg)
+                }
+            }
+        })
+    }
+</script>

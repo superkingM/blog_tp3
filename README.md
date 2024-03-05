@@ -9,9 +9,8 @@
 - [x] 用户登录
 - [X] 分类管理
 - [x] 文章管理
-- [ ] 标签管理
-- [ ] 评论管理
-- [ ] 访问记录
+- [x] 评论管理
+- [x] 访问记录
 
 ### 前端页面
 
@@ -24,6 +23,7 @@
 ## 页面效果
 
 ### 前端
+
 - 首页和分类页文章列表
 
 ![首页和分类页文章列表](/Public/pic/index.png)
@@ -35,7 +35,11 @@
 ### 后端
 
 - 分类管理
-![分类管理](/Public/pic/cate.png)
+  ![分类管理](/Public/pic/cate.png)
 - 文章管理
-![文章管理](/Public/pic/admin_article.png)
-![新增、编辑文章](/Public/pic/add_article.png)
+  ![文章管理](/Public/pic/admin_article.png)
+  ![新增、编辑文章](/Public/pic/add_article.png)
+- 评论管理
+  ![评论管理](/Public/pic/comment.png)
+- 访问记录
+  ![访问记录](/Public/pic/record.png)

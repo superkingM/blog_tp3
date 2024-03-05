@@ -1,0 +1,86 @@
+<layout name="base"/>
+<div class="tpl-content-wrapper">
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title  am-cf">
+                            <ol class="am-breadcrumb am-breadcrumb-slash">
+                                <li><a href="{:U('Admin/Index/index')}" class="am-icon-home">首页</a></li>
+                                <li><a href="{:U('Admin/Record/index')}">访问管理</a></li>
+                                <li class="am-active">访问列表</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="widget-body  am-fr">
+                        <div class="am-u-sm-12">
+                            <table width="100%"
+                                   class="am-table am-table-striped am-table-compact am-table-bordered am-table-radius tpl-table-black">
+                                <thead>
+                                <tr>
+                                    <th>访问地址</th>
+                                    <th>访问设备</th>
+                                    <th>ip</th>
+                                    <th>时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <foreach name="recordList" item="item">
+                                    <tr>
+                                        <td>{$item.url}</td>
+                                        <td>{$item.user_agent}</td>
+                                        <td>{$item.ip}</td>
+                                        <td>{$item.create_time|substr=0,10}</td>
+                                    </tr>
+                                </foreach>
+
+                                <!-- more data -->
+                                </tbody>
+                            </table>
+                            <ul class="am-pagination">
+                                <li class="am-pagination-prev"><a href="{:U('Admin/Record/index')}?page={$prev}">&laquo; 上一页</a></li>
+                                <li class="am-pagination-next"><a href="{:U('Admin/Record/index')}?page={$next}">下一页 &raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //删除文章
+    function deleteComment(id) {
+        $.ajax({
+            type: 'post',
+            url: "{:U('Admin/Comment/delete')}",
+            data: {id: id},
+            async: false,
+            success: function (data) {
+                if (data.code == 200) {
+                    location.reload()
+                } else {
+                    alert(data.msg)
+                }
+            }
+        })
+    }
+
+    //修改评论状态
+    function stateComment(id) {
+        $.ajax({
+            type: 'post',
+            url: "{:U('Admin/Comment/state')}",
+            data: {id: id},
+            async: false,
+            success: function (data) {
+                if (data.code == 200) {
+                    location.reload()
+                } else {
+                    alert(data.msg)
+                }
+            }
+        })
+    }
+</script>

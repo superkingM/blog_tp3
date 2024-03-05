@@ -90,6 +90,17 @@
                     <i class="am-icon-table sidebar-nav-link-logo"></i> 文章管理
                 </a>
             </li>
+            <li class="sidebar-nav-link">
+                <a href="{:U('Admin/Comment/index')}" class="<?php if(isset($a_comment)){echo $a_comment;}?>">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 评论管理
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="{:U('Admin/Record/index')}" class="<?php if(isset($a_record)){echo $a_record;}?>">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 访问记录
+                </a>
+            </li>
+
         </ul>
     </div>
 
