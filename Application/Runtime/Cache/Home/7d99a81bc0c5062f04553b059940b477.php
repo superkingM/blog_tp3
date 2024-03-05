@@ -80,9 +80,9 @@
         </div>
     </div>
     <hr>
-    <form class="am-form am-g">
+    <form class="am-form am-g" method="post" action="<?php echo U('Home/Index/comment');?>/id/<?php echo ($article["id"]); ?>">
         <fieldset>
-            <div class="am-form-group am-u-sm-4 blog-clear-left">
+            <div class="am-form-group am-u-sm-4 blog-clear-left" >
                 <input type="text" class="" placeholder="名字" name="name">
             </div>
             <div class="am-form-group am-u-sm-4">

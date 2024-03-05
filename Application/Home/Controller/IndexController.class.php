@@ -17,7 +17,7 @@ class IndexController extends Controller
         $hotArticleList = $articleModel->where(['show' => 1])->order('view desc')->limit(5)->select();
 
         $commentModel = D('Comment');
-        $latestCommentList = $commentModel->join('article ON comment.article_id = article.id')->where(['article.delete_at'=>0])->limit(5)->select();
+        $latestCommentList = $commentModel->join('article ON comment.article_id = article.id')->where(['article.delete_at' => 0])->limit(5)->select();
         $this->assign('latestCommentList', $latestCommentList);
         $this->assign('hotArticleList', $hotArticleList);
         $this->assign('categoryList', $categoryList);
@@ -103,17 +103,7 @@ class IndexController extends Controller
         if (!$article) {
             $this->error('此文章不存在');
         } else {
-            $params = I('get.');
             $commentModel = D('Comment');
-            if (array_key_exists('name', $params) && !empty($params['name']) && array_key_exists('email', $params) && !empty($params['email']) && array_key_exists('comment', $params) && !empty($params['comment'])) {
-                $commentModel->add([
-                    'article_id' => $id,
-                    'name' => $params['name'],
-                    'email' => $params['email'],
-                    'comment' => $params['comment'],
-                    'create_time' => date('Y-m-d H:i:s')
-                ]);
-            }
             $commentList = $commentModel->where(['article_id' => $id, 'status' => 1])->select();
             $this->assign('commentList', $commentList);
             $articleModel->where(['id' => $id])->setInc('view');
@@ -122,5 +112,41 @@ class IndexController extends Controller
         }
         $this->assign('article', $article);
         $this->display();
+    }
+
+    /**
+     * 文章评论
+     * @param $id
+     * @return void
+     */
+    public function comment($id)
+    {
+        if (IS_POST) {
+            $params = I('post.');
+            $name = I('post.name');
+            $email = I('post.email');
+            $comment = I('post.comment');
+            if (empty($name)) {
+                $this->error('请填写评论人');
+            }
+            if (empty($email)) {
+                $this->error('请填写邮箱');
+            }
+            if (empty($comment)) {
+                $this->error('请填写评论');
+            }
+            $commentModel = D('Comment');
+            $commentModel->add([
+                'article_id' => $id,
+                'name' => $params['name'],
+                'email' => $params['email'],
+                'comment' => $params['comment'],
+                'create_time' => date('Y-m-d H:i:s')
+            ]);
+            $this->redirect('Home/Index/article?id=' . $id);
+        } else {
+            $this->error('访问错误');
+        }
+
     }
 }
