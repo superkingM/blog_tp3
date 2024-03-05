@@ -18,6 +18,14 @@ class IndexController extends Controller
 
         $commentModel = D('Comment');
         $latestCommentList = $commentModel->join('article ON comment.article_id = article.id')->where(['article.delete_at' => 0])->limit(5)->select();
+
+        $recordModel = D('Record');
+        $recordModel->add([
+            'url' => $_SERVER['REQUEST_URI'],
+            'user_agent' => $_SERVER['HTTP_USER_AGENT'],
+            'ip' => get_client_ip(),
+            'create_time' => date('Y-m-d H:i:s')
+        ]);
         $this->assign('latestCommentList', $latestCommentList);
         $this->assign('hotArticleList', $hotArticleList);
         $this->assign('categoryList', $categoryList);
@@ -141,6 +149,7 @@ class IndexController extends Controller
                 'name' => $params['name'],
                 'email' => $params['email'],
                 'comment' => $params['comment'],
+                'ip' => get_client_ip(),
                 'create_time' => date('Y-m-d H:i:s')
             ]);
             $this->redirect('Home/Index/article?id=' . $id);
