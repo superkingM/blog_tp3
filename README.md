@@ -20,6 +20,15 @@
 - [x] 最热文章
 - [x] 最新评论
 
+### 数据库导入
+
+> 将Application/Common/Conf/blog3.sql导入到mysql数据库，并在当前所在目录config.php配置数据连接
+
+- 前端地址:`host/index.php/Home/Index/index`
+- 后台地址:`host/index.php/Admin/Index/index`
+- 后台管理员: admin
+- 后台密码: 123456
+
 ## 页面效果
 
 ### 前端
